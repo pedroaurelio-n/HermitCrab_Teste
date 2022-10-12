@@ -7,6 +7,8 @@ namespace PedroAurelio.HermitCrab
     [RequireComponent(typeof(Rigidbody2D))]
     public class RunnerMovement : MonoBehaviour
     {
+        public static float CurrentDistance { get; private set; }
+
         [Header("General Settings")]
         [SerializeField] private Vector2 initialVelocity = new Vector2(3f, 0f);
         [SerializeField] private float maxYPosition = 12f;
@@ -42,6 +44,8 @@ namespace PedroAurelio.HermitCrab
 
         private void Update()
         {
+            CurrentDistance = transform.position.x;
+            
             CheckGroundedStatus();
             LimitPositionY();
         }
