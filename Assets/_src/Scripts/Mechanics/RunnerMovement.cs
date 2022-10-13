@@ -8,6 +8,7 @@ namespace PedroAurelio.HermitCrab
     public class RunnerMovement : MonoBehaviour
     {
         public static float CurrentDistance { get; private set; }
+        public bool IsGrounded { get => _isGrounded; }
 
         [Header("General Settings")]
         [SerializeField] private Vector2 initialVelocity = new Vector2(3f, 0f);

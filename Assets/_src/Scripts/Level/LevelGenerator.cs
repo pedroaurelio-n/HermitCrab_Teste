@@ -10,7 +10,6 @@ namespace PedroAurelio.HermitCrab
         [SerializeField] private GameObject prefabArea;
         [SerializeField] private float cameraOffsetX = 6f;
         [SerializeField] private float areaWidth = 24f;
-        [SerializeField] private float areaHeight = 13f;
         [SerializeField] private int startGenerationCount = 3;
         [SerializeField] private int maxActiveAreas = 5;
 
@@ -32,9 +31,8 @@ namespace PedroAurelio.HermitCrab
             _areaIndex++;
 
             var areaPositionX = (_areaIndex * areaWidth);
-            var areaPositionY = areaHeight * 0.5f;
 
-            var areaPosition = new Vector2(areaPositionX + cameraOffsetX, areaPositionY);
+            var areaPosition = new Vector2(areaPositionX + cameraOffsetX, 0f);
             var newArea = Instantiate(prefabArea, areaPosition, Quaternion.identity, transform);
 
             _activeAreas.Add(newArea);
