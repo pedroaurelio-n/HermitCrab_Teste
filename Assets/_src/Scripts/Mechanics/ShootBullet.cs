@@ -51,7 +51,7 @@ namespace PedroAurelio.HermitCrab
 
         public void Shoot()
         {
-            var bullet = Instantiate(bulletPrefab, shootPos.position, Quaternion.identity);
+            var bullet = Instantiate(bulletPrefab, shootPos.position, Quaternion.identity, transform.parent);
             bullet.velocity = _direction * speed;
 
             HasShot = true;

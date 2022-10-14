@@ -6,16 +6,26 @@ namespace PedroAurelio.HermitCrab
 {
     public class LevelGenerator : MonoBehaviour
     {
+        public delegate void CalculateDistanceRemaining(float distanceRemaining);
+        public static event CalculateDistanceRemaining onDistanceCalculated;
+
+        [Header("Dependencies")]
         [SerializeField] private GameObject startArea;
         [SerializeField] private List<GameObject> prefabAreas;
+
+        [Header("Dimensions Settings")]
         [SerializeField] private float cameraOffsetX = 6f;
         [SerializeField] private float areaWidth = 24f;
+
+        [Header("Area Settings")]
         [SerializeField] private int startGenerationCount = 3;
         [SerializeField] private int maxActiveAreas = 5;
-        [SerializeField] private int limitArea = 10;
+        [SerializeField] private int areaRepositionLimit = 10;
+        [SerializeField] private int gameEndAreaIndex = 30;
 
         private List<GameObject> _activeAreas = new List<GameObject>();
-        private int _areaIndex;
+        private int _areaPositionIndex;
+        private int _totalAreas;
 
         private void Awake()
         {
@@ -27,17 +37,33 @@ namespace PedroAurelio.HermitCrab
             }
         }
 
-        private void GenerateNewArea()
-        {            
-            _areaIndex++;
+        private void Start()
+        {
+            var distanceRemaining = (gameEndAreaIndex * areaWidth);
+            onDistanceCalculated?.Invoke(distanceRemaining);
+        }
 
-            var areaPositionX = (_areaIndex * areaWidth);
+        private void OnValidate()
+        {
+            if (maxActiveAreas < 3)
+                maxActiveAreas = 3;
+
+            if (areaRepositionLimit < maxActiveAreas)
+                areaRepositionLimit = maxActiveAreas;
+        }
+
+        private void GenerateNewArea()
+        {
+            _areaPositionIndex++;
+
+            var areaPositionX = (_areaPositionIndex * areaWidth);
             var areaPosition = new Vector2(areaPositionX + cameraOffsetX, 0f);
 
             var r = Random.Range(0, prefabAreas.Count);
             var newArea = Instantiate(prefabAreas[r], areaPosition, Quaternion.identity, transform);
 
             _activeAreas.Add(newArea);
+            _totalAreas++;
         }
 
         private void DestroyOldestArea()
@@ -49,7 +75,7 @@ namespace PedroAurelio.HermitCrab
                 _activeAreas.RemoveAt(0);
             }
 
-            if (_areaIndex >= limitArea)
+            if (_areaPositionIndex >= areaRepositionLimit)
                 RepositionAreas();
 
             GenerateNewArea();
@@ -57,8 +83,10 @@ namespace PedroAurelio.HermitCrab
 
         private void RepositionAreas()
         {
-            _areaIndex = 0;
-            var resetIndex = -1;
+            _areaPositionIndex = 0;
+
+            var areasBehindPlayer = maxActiveAreas - 2;
+            var resetIndex = -areasBehindPlayer;
 
             for (int i = 0; i < _activeAreas.Count; i++)
             {

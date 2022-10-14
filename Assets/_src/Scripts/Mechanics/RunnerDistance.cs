@@ -11,16 +11,20 @@ namespace PedroAurelio.HermitCrab
 
         private RunnerMovement _movement;
 
-        private void Awake()
-        {
-            _movement = GetComponent<RunnerMovement>();
-            CurrentDistance = 0f;
-        }
+        private void Awake() => _movement = GetComponent<RunnerMovement>();
 
         private void Update()
         {
             var distanceTravelled = _movement.CurrentVelocity.x * Time.deltaTime;
-            CurrentDistance += distanceTravelled;
-        }      
+            CurrentDistance -= distanceTravelled;
+        }
+
+        private void SetRemainingDistance(float distance)
+        {
+            CurrentDistance = distance;
+        }
+
+        private void OnEnable() => LevelGenerator.onDistanceCalculated += SetRemainingDistance;
+        private void OnDisable() => LevelGenerator.onDistanceCalculated -= SetRemainingDistance;
     }
 }
