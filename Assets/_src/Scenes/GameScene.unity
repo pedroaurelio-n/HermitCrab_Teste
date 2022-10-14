@@ -329,7 +329,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 497390275}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.75, z: 0}
+  m_LocalPosition: {x: 0, y: -0.77, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2072844482}
@@ -5498,7 +5498,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startArea: {fileID: 826972757}
-  prefabArea: {fileID: 1229649671722665143, guid: cc0206c021f79b643b2bfb040dc1ef8a, type: 3}
+  prefabAreas:
+  - {fileID: 1229649671722665143, guid: cc0206c021f79b643b2bfb040dc1ef8a, type: 3}
+  - {fileID: 1229649671722665143, guid: c52d39972e31d9c4795f6880003f64a8, type: 3}
   cameraOffsetX: 6
   areaWidth: 18
   startGenerationCount: 2
@@ -5928,6 +5930,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2072844482}
   - component: {fileID: 2072844483}
+  - component: {fileID: 2072844480}
   - component: {fileID: 2072844484}
   - component: {fileID: 2072844481}
   - component: {fileID: 2072844485}
@@ -5938,6 +5941,24 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
+--- !u!114 &2072844480
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2072844479}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b45d73907afc94d4ba3e7853dd860048, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  direction: 0
+  speed: 20
+  fireRate: 1
+  needInput: 1
+  bulletPrefab: {fileID: 2902594843689974956, guid: f8b056d6792d08248b324aa42161227d, type: 3}
+  shootPos: {fileID: 568611686}
 --- !u!50 &2072844481
 Rigidbody2D:
   serializedVersion: 4
@@ -5957,7 +5978,7 @@ Rigidbody2D:
   m_Material: {fileID: 6200000, guid: 840136458c741d240af1160756708163, type: 2}
   m_Interpolate: 0
   m_SleepingMode: 1
-  m_CollisionDetection: 0
+  m_CollisionDetection: 1
   m_Constraints: 4
 --- !u!4 &2072844482
 Transform:
@@ -6024,7 +6045,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.49}
+  m_Offset: {x: 0, y: -0.5}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -6035,8 +6056,8 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1, y: 1}
-  m_EdgeRadius: 0.01
+  m_Size: {x: 0.9, y: 1}
+  m_EdgeRadius: 0
 --- !u!1001 &1229649672516017890
 PrefabInstance:
   m_ObjectHideFlags: 0

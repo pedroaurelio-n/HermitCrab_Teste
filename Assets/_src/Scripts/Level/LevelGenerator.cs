@@ -7,7 +7,7 @@ namespace PedroAurelio.HermitCrab
     public class LevelGenerator : MonoBehaviour
     {
         [SerializeField] private GameObject startArea;
-        [SerializeField] private GameObject prefabArea;
+        [SerializeField] private List<GameObject> prefabAreas;
         [SerializeField] private float cameraOffsetX = 6f;
         [SerializeField] private float areaWidth = 24f;
         [SerializeField] private int startGenerationCount = 3;
@@ -33,7 +33,9 @@ namespace PedroAurelio.HermitCrab
             var areaPositionX = (_areaIndex * areaWidth);
 
             var areaPosition = new Vector2(areaPositionX + cameraOffsetX, 0f);
-            var newArea = Instantiate(prefabArea, areaPosition, Quaternion.identity, transform);
+
+            var r = Random.Range(0, prefabAreas.Count);
+            var newArea = Instantiate(prefabAreas[r], areaPosition, Quaternion.identity, transform);
 
             _activeAreas.Add(newArea);
         }
