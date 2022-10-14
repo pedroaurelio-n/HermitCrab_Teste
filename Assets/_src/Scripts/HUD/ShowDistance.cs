@@ -11,7 +11,7 @@ namespace PedroAurelio.HermitCrab
 
         private void Update()
         {
-            distanceNumber.text = RunnerMovement.CurrentDistance.ToString("0");
+            distanceNumber.text = RunnerDistance.CurrentDistance.ToString("0");
         }
     }
 }

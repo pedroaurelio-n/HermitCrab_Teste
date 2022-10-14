@@ -7,7 +7,7 @@ namespace PedroAurelio.HermitCrab
     [RequireComponent(typeof(Rigidbody2D))]
     public class RunnerMovement : MonoBehaviour
     {
-        public static float CurrentDistance { get; private set; }
+        public Vector2 CurrentVelocity { get => _rigidbody.velocity; }
         public bool IsGrounded { get => _isGrounded; }
 
         [Header("General Settings")]
@@ -45,8 +45,6 @@ namespace PedroAurelio.HermitCrab
 
         private void Update()
         {
-            CurrentDistance = transform.position.x;
-            
             CheckGroundedStatus();
             LimitPositionY();
         }
@@ -89,10 +87,7 @@ namespace PedroAurelio.HermitCrab
 
         private void ResetVelocityY() => _rigidbody.velocity = new Vector2(_rigidbody.velocity.x, 0f);
 
-        private void FixedUpdate()
-        {
-            ApplyFallingForces();
-        }
+        private void FixedUpdate() => ApplyFallingForces();
 
         private void ApplyFallingForces()
         {

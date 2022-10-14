@@ -12,6 +12,7 @@ namespace PedroAurelio.HermitCrab
         [SerializeField] private float areaWidth = 24f;
         [SerializeField] private int startGenerationCount = 3;
         [SerializeField] private int maxActiveAreas = 5;
+        [SerializeField] private int limitArea = 10;
 
         private List<GameObject> _activeAreas = new List<GameObject>();
         private int _areaIndex;
@@ -31,7 +32,6 @@ namespace PedroAurelio.HermitCrab
             _areaIndex++;
 
             var areaPositionX = (_areaIndex * areaWidth);
-
             var areaPosition = new Vector2(areaPositionX + cameraOffsetX, 0f);
 
             var r = Random.Range(0, prefabAreas.Count);
@@ -49,17 +49,26 @@ namespace PedroAurelio.HermitCrab
                 _activeAreas.RemoveAt(0);
             }
 
+            if (_areaIndex >= limitArea)
+                RepositionAreas();
+
             GenerateNewArea();
         }
 
-        private void OnEnable()
+        private void RepositionAreas()
         {
-            CheckForRunnerExit.onRunnerExitedArea += DestroyOldestArea;
+            _areaIndex = 0;
+            var resetIndex = -1;
+
+            for (int i = 0; i < _activeAreas.Count; i++)
+            {
+                var areaPositionX = (resetIndex * areaWidth);
+                _activeAreas[i].transform.position = new Vector2(areaPositionX + cameraOffsetX, 0f);
+                resetIndex++;
+            }
         }
 
-        private void OnDisable()
-        {
-            CheckForRunnerExit.onRunnerExitedArea -= DestroyOldestArea;
-        }
+        private void OnEnable() => CheckForNewAreaStart.onNewAreaStart += DestroyOldestArea;
+        private void OnDisable() => CheckForNewAreaStart.onNewAreaStart -= DestroyOldestArea;
     }
 }
