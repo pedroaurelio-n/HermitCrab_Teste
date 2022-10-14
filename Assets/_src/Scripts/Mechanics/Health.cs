@@ -8,10 +8,15 @@ namespace PedroAurelio.HermitCrab
     {
         [SerializeField] private float maxHealth;
 
+        private IDestroyable _destroyable;
+
         private float _currentHealth;
 
         private void Awake()
         {
+            if (!TryGetComponent<IDestroyable>(out _destroyable))
+                Debug.LogError($"Health component needs reference to an IDestroyable.");
+            
             _currentHealth = maxHealth;
         }
 
@@ -25,7 +30,7 @@ namespace PedroAurelio.HermitCrab
 
         private void Die()
         {
-            Destroy(gameObject);
+            _destroyable.Destroy();
         }
     }
 }

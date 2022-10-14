@@ -8,20 +8,22 @@ namespace PedroAurelio.HermitCrab
     {
         [SerializeField] private LayerMask contactLayers;
 
-        private void OnCollisionEnter2D(Collision2D other)
+        private void CheckForContact(GameObject other)
         {
-            var otherLayer = other.gameObject.layer;
+            var otherLayer = other.layer;
 
             if ((1 << otherLayer & contactLayers) != 0) 
                 Destroy(gameObject);
         }
 
+        private void OnCollisionEnter2D(Collision2D other)
+        {
+            CheckForContact(other.gameObject);
+        }
+
         private void OnTriggerEnter2D(Collider2D other)
         {
-            var otherLayer = other.gameObject.layer;
-
-            if ((1 << otherLayer & contactLayers) != 0) 
-                Destroy(gameObject);
+            CheckForContact(other.gameObject);
         }
     }
 }

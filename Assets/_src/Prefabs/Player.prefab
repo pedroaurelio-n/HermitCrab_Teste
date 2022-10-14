@@ -99,6 +99,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isGrounded: IsGrounded
   shoot: Shoot
+  die: Die
 --- !u!95 &7112626994301578534
 Animator:
   serializedVersion: 3
@@ -127,13 +128,15 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7112626994527140602}
+  - component: {fileID: 1813980040746787145}
   - component: {fileID: 7112626994527140603}
   - component: {fileID: 7112626994527140600}
+  - component: {fileID: 5723673823577720601}
   - component: {fileID: 7112626994527140604}
   - component: {fileID: 7112626994527140606}
   - component: {fileID: 7112626994527140601}
   - component: {fileID: 7112626994527140605}
-  m_Layer: 0
+  m_Layer: 3
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -156,6 +159,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1813980040746787145
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7112626994527140487}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 32d10fa4da5f020468b8b828b5b45820, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &7112626994527140603
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -169,7 +184,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   initialVelocity: {x: 7, y: 0}
-  maxYPosition: 12
+  maxYPosition: 8.5
   groundCheckPoint: {fileID: 7112626995028848892}
   groundCheckRadius: 0.28
   groundCheckLayer:
@@ -198,6 +213,19 @@ MonoBehaviour:
   needInput: 1
   bulletPrefab: {fileID: 2902594843689974956, guid: f8b056d6792d08248b324aa42161227d, type: 3}
   shootPos: {fileID: 7112626995502887262}
+--- !u!114 &5723673823577720601
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7112626994527140487}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bb8f86d0e0c1ef24393af214810544cb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  maxHealth: 1
 --- !u!114 &7112626994527140604
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -222,7 +250,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 72d8ff0892cb09846be7106bc1b9bad9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxDistance: 0
 --- !u!50 &7112626994527140601
 Rigidbody2D:
   serializedVersion: 4

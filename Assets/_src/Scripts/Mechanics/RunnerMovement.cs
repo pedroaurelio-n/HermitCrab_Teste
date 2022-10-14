@@ -85,6 +85,7 @@ namespace PedroAurelio.HermitCrab
             _preJumpBuffer = 0f;
         }
 
+        public void ResetVelocity() => _rigidbody.velocity = Vector2.zero;
         private void ResetVelocityY() => _rigidbody.velocity = new Vector2(_rigidbody.velocity.x, 0f);
 
         private void FixedUpdate() => ApplyFallingForces();
