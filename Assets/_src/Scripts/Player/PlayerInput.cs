@@ -21,22 +21,22 @@ namespace PedroAurelio.HermitCrab
         {
             if (Input.GetMouseButtonDown(0))
             {
-                _movement.SetJumpInput(true);
+                _shoot.SetShootInput(true);
             }
 
             if (Input.GetMouseButtonUp(0))
             {
-                _movement.SetJumpInput(false);
+                _shoot.SetShootInput(false);
             }
 
             if (Input.GetMouseButtonDown(1))
             {
-                _shoot.SetShootInput(true);
+                _movement.SetJumpInput(true);
             }
 
             if (Input.GetMouseButtonUp(1))
             {
-                _shoot.SetShootInput(false);
+                _movement.SetJumpInput(false);
             }
         }
     }

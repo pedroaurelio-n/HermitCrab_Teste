@@ -329,7 +329,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 497390275}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.77, z: 0}
+  m_LocalPosition: {x: 0, y: -0.85, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2072844482}
@@ -5501,6 +5501,9 @@ MonoBehaviour:
   prefabAreas:
   - {fileID: 1229649671722665143, guid: cc0206c021f79b643b2bfb040dc1ef8a, type: 3}
   - {fileID: 1229649671722665143, guid: c52d39972e31d9c4795f6880003f64a8, type: 3}
+  - {fileID: 1229649671722665143, guid: e9ac759d6c389444a82509921659ca6f, type: 3}
+  - {fileID: 1229649671722665143, guid: c0583f23ac9fb8c45be169312872360a, type: 3}
+  - {fileID: 1229649671722665143, guid: 12c9754a2a13d724d91cd450bb89d8ba, type: 3}
   cameraOffsetX: 6
   areaWidth: 18
   startGenerationCount: 2
@@ -5955,7 +5958,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   direction: 0
   speed: 20
-  fireRate: 1
+  fireRate: 0.9
   needInput: 1
   bulletPrefab: {fileID: 2902594843689974956, guid: f8b056d6792d08248b324aa42161227d, type: 3}
   shootPos: {fileID: 568611686}
@@ -6011,10 +6014,10 @@ MonoBehaviour:
   initialVelocity: {x: 7, y: 0}
   maxYPosition: 12
   groundCheckPoint: {fileID: 497390276}
-  groundCheckRadius: 0.26
+  groundCheckRadius: 0.28
   groundCheckLayer:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 192
   jumpHeight: 4
   _coyoteTimeThreshold: 0.25
   _preJumpThreshold: 0.15
@@ -6056,7 +6059,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.9, y: 1}
+  m_Size: {x: 0.8, y: 1}
   m_EdgeRadius: 0
 --- !u!1001 &1229649672516017890
 PrefabInstance:
