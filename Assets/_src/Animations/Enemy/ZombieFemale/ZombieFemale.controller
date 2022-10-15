@@ -21,7 +21,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: d1bba1de21d2f5847be7d997b8773746, type: 2}
+  m_Motion: {fileID: 7400000, guid: 13f5ffbe41fac0941a57655ec60602fc, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -83,7 +83,7 @@ AnimatorController:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: ZombieMale
+  m_Name: ZombieFemale
   serializedVersion: 5
   m_AnimatorParameters:
   - m_Name: Attack
@@ -181,7 +181,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: 0fc6133042bc0ec4dac83e62f1c15da4, type: 2}
+  m_Motion: {fileID: 7400000, guid: 93b0192ebf31547428e1eb0cf31ed8ea, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 
@@ -209,7 +209,7 @@ AnimatorState:
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 0
   m_TimeParameterActive: 0
-  m_Motion: {fileID: 7400000, guid: c4e9e9133cfd09b4cbb98f6589677ed9, type: 2}
+  m_Motion: {fileID: 7400000, guid: 7ab29d0b8537c7245899a5dffe0fa1e9, type: 2}
   m_Tag: 
   m_SpeedParameter: 
   m_MirrorParameter: 

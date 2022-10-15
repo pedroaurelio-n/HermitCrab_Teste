@@ -69,7 +69,7 @@ namespace PedroAurelio.HermitCrab
             if (transform.position.y <= maxYPosition)
                 return;
 
-            ResetVelocityY();
+            // ResetVelocityY();
 
             var clampedPosition = new Vector2(transform.position.x, maxYPosition);
             transform.position = clampedPosition;
