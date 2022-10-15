@@ -209,7 +209,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   direction: 0
   speed: 20
-  fireRate: 0.9
+  fireRate: 0.7
   needInput: 1
   bulletPrefab: {fileID: 2902594843689974956, guid: f8b056d6792d08248b324aa42161227d, type: 3}
   shootPos: {fileID: 7112626995502887262}

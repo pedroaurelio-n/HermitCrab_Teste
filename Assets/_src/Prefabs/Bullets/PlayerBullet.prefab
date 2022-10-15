@@ -116,7 +116,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   contactLayers:
     serializedVersion: 2
-    m_Bits: 193
+    m_Bits: 449
 --- !u!1 &2902594843897498797
 GameObject:
   m_ObjectHideFlags: 0
