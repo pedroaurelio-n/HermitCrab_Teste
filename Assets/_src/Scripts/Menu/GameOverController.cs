@@ -14,29 +14,29 @@ namespace PedroAurelio.HermitCrab
         [SerializeField] private GameObject lossScreen;
         [SerializeField] private TextMeshProUGUI lossScore;
 
-        private void ShowGameOverScreen(bool runnerDied)
+        private void ShowWinScreen()
         {
-            if (runnerDied)
-            {
-                lossScreen.SetActive(true);
-                var halfScore = Mathf.CeilToInt(gameScore.CurrentScore * 0.5f);
-                lossScore.text = halfScore.ToString();
-            }
-            else
-            {
-                winScreen.SetActive(true);
-                winScore.text = gameScore.CurrentScore.ToString();
-            }
+            winScreen.SetActive(true);
+            winScore.text = gameScore.CurrentScore.ToString();
+        }
+
+        private void ShowLossScreen()
+        {
+            lossScreen.SetActive(true);
+            var halfScore = Mathf.CeilToInt(gameScore.CurrentScore * 0.5f);
+            lossScore.text = halfScore.ToString();
         }
 
         private void OnEnable()
         {
-            Runner.onRunnerDeath += () => ShowGameOverScreen(true);
+            TriggerGameWin.onGameWin += ShowWinScreen;
+            Runner.onRunnerDeath += ShowLossScreen;
         }
 
         private void OnDisable()
         {
-            Runner.onRunnerDeath -= () => ShowGameOverScreen(true);
+            TriggerGameWin.onGameWin -= ShowWinScreen;
+            Runner.onRunnerDeath -= ShowLossScreen;
         }
     }
 }

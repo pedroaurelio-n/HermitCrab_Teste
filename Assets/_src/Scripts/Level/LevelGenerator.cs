@@ -11,6 +11,7 @@ namespace PedroAurelio.HermitCrab
 
         [Header("Dependencies")]
         [SerializeField] private GameObject startArea;
+        [SerializeField] private GameObject finalArea;
         [SerializeField] private List<GameObject> prefabAreas;
 
         [Header("Dimensions Settings")]
@@ -55,15 +56,24 @@ namespace PedroAurelio.HermitCrab
         private void GenerateNewArea()
         {
             _areaPositionIndex++;
+            _totalAreas++;
 
             var areaPositionX = (_areaPositionIndex * areaWidth);
             var areaPosition = new Vector2(areaPositionX + cameraOffsetX, 0f);
 
-            var r = Random.Range(0, prefabAreas.Count);
-            var newArea = Instantiate(prefabAreas[r], areaPosition, Quaternion.identity, transform);
+            GameObject newArea;
+
+            if (_totalAreas < gameEndAreaIndex)
+            {
+                var r = Random.Range(0, prefabAreas.Count);
+                newArea = Instantiate(prefabAreas[r], areaPosition, Quaternion.identity, transform);
+            }
+            else
+            {
+                newArea = Instantiate(finalArea, areaPosition, Quaternion.identity, transform);
+            }
 
             _activeAreas.Add(newArea);
-            _totalAreas++;
         }
 
         private void DestroyOldestArea()

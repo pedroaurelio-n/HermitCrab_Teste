@@ -24,15 +24,17 @@ namespace PedroAurelio.HermitCrab
             
             _movement = transform.parent.GetComponent<RunnerMovement>();
             _shoot = transform.parent.GetComponent<ShootBullet>();
-
-            if (_movement != null)
-                _animator.SetBool(isMoving, true);
-            else
-                _animator.SetBool(isMoving, false);
         }
 
         private void Update()
         {
+            if (_movement.CurrentVelocity == Vector2.zero)
+            {
+                _animator.SetBool(isMoving, false);
+                return;
+            }
+
+            _animator.SetBool(isMoving, true);
             _animator.SetBool(isGrounded, _movement.IsGrounded);
 
             if (_shoot.HasShot)
