@@ -97,6 +97,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2bb2c2ae5ef04c429c563b542224a75, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isMoving: IsMoving
   isGrounded: IsGrounded
   shoot: Shoot
   die: Die
@@ -186,13 +187,13 @@ MonoBehaviour:
   initialVelocity: {x: 7, y: 0}
   maxYPosition: 8.5
   groundCheckPoint: {fileID: 7112626995028848892}
-  groundCheckRadius: 0.28
+  groundCheckRadius: 0.38
   groundCheckLayer:
     serializedVersion: 2
     m_Bits: 192
   jumpHeight: 4
   _coyoteTimeThreshold: 0.25
-  _preJumpThreshold: 0.15
+  _preJumpThreshold: 0.3
   fallMultiplier: 1.8
   lowJumpMultiplier: 1.6
 --- !u!114 &7112626994527140600
@@ -284,7 +285,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.5}
+  m_Offset: {x: 0, y: -0.2}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -295,7 +296,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.8, y: 1}
+  m_Size: {x: 0.8, y: 1.58}
   m_EdgeRadius: 0
 --- !u!1 &7112626995028848891
 GameObject:
@@ -321,7 +322,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7112626995028848891}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.85, z: 0}
+  m_LocalPosition: {x: 0, y: -0.8, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 7112626994527140602}

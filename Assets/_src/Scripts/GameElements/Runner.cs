@@ -7,6 +7,9 @@ namespace PedroAurelio.HermitCrab
     [RequireComponent(typeof(RunnerMovement))]
     public class Runner : MonoBehaviour, IDestroyable
     {
+        public delegate void RunnerDeath();
+        public static event RunnerDeath onRunnerDeath;
+
         private RunnerMovement _movement;
         private PlayerAnimation _playerAnimation;
 
@@ -20,6 +23,7 @@ namespace PedroAurelio.HermitCrab
         {
             _movement.ResetVelocity();
             _playerAnimation.DeathAnimation();
+            onRunnerDeath?.Invoke();
         }
 
         private void OnCollisionEnter2D(Collision2D other)

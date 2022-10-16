@@ -7,6 +7,8 @@ namespace PedroAurelio.HermitCrab
 {
     public class ShowScore : MonoBehaviour
     {
+        public int CurrentScore { get => _currentScore; }
+        
         [SerializeField] private TextMeshProUGUI scoreNumber;
 
         private int _currentScore;

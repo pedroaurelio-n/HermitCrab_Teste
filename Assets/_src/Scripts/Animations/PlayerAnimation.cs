@@ -7,6 +7,7 @@ namespace PedroAurelio.HermitCrab
     public class PlayerAnimation : MonoBehaviour
     {
         [Header("Animator Params")]
+        [SerializeField] private string isMoving = "IsMoving";
         [SerializeField] private string isGrounded = "IsGrounded";
         [SerializeField] private string shoot = "Shoot";
         [SerializeField] private string die = "Die";
@@ -23,6 +24,11 @@ namespace PedroAurelio.HermitCrab
             
             _movement = transform.parent.GetComponent<RunnerMovement>();
             _shoot = transform.parent.GetComponent<ShootBullet>();
+
+            if (_movement != null)
+                _animator.SetBool(isMoving, true);
+            else
+                _animator.SetBool(isMoving, false);
         }
 
         private void Update()

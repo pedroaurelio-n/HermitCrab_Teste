@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 3075796776789891207}
   - component: {fileID: 3075796776789891210}
   - component: {fileID: 3075796776789891205}
+  - component: {fileID: 7173317539169619844}
   m_Layer: 8
   m_Name: ZombieFemale
   m_TagString: Untagged
@@ -86,6 +87,22 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 0.88, y: 1.65}
   m_EdgeRadius: 0
+--- !u!114 &7173317539169619844
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3075796776789891206}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3e4792ed55a559144b2fddf4b756d01f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  damage: 1
+  damageLayers:
+    serializedVersion: 2
+    m_Bits: 8
 --- !u!1 &6954897515343996390
 GameObject:
   m_ObjectHideFlags: 0
