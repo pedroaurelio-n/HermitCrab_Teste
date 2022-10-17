@@ -11,14 +11,12 @@ namespace PedroAurelio.HermitCrab
         [SerializeField] private string die = "Die";
 
         private Animator _animator;
-        private Collider2D _collider;
 
         private bool _isDead;
 
         private void Awake()
         {
             _animator = GetComponent<Animator>();
-            _collider = transform.parent.GetComponent<Collider2D>();
         }
 
         public void AttackAnimation()
@@ -33,8 +31,6 @@ namespace PedroAurelio.HermitCrab
             
             _animator.SetTrigger(die);
             _isDead = true;
-            
-            _collider.enabled = false;
         }
     }
 }

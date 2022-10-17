@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace PedroAurelio.HermitCrab
 {
-    public class PlayerAnimation : MonoBehaviour
+    public class RunnerAnimation : MonoBehaviour
     {
         [Header("Animator Params")]
         [SerializeField] private string isMoving = "IsMoving";
@@ -51,9 +51,6 @@ namespace PedroAurelio.HermitCrab
             
             _animator.SetTrigger(die);
             _isDead = true;
-
-            _movement.enabled = false;
-            _shoot.enabled = false;
         }
     }
 }

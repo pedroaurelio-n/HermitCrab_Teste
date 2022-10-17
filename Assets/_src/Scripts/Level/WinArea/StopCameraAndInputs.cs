@@ -4,17 +4,17 @@ using UnityEngine;
 
 namespace PedroAurelio.HermitCrab
 {
-    public class StopCameraFollow : MonoBehaviour
+    public class StopCameraAndInputs : MonoBehaviour
     {
-        public delegate void StopFollow();
-        public static event StopFollow onStopFollow;
+        public delegate void StopCameraFollow();
+        public static event StopCameraFollow onStopCameraFollow;
 
         private void OnTriggerEnter2D(Collider2D other)
         {
             if (other.TryGetComponent<PlayerInput>(out PlayerInput playerInput))
             {
                 playerInput.enabled = false;
-                onStopFollow?.Invoke();
+                onStopCameraFollow?.Invoke();
             }
         }
     }

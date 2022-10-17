@@ -13,7 +13,7 @@ namespace PedroAurelio.HermitCrab
 
         private void StopFollow() => _cinemachineCamera.m_Follow = null;
 
-        private void OnEnable() => StopCameraFollow.onStopFollow += StopFollow;
-        private void OnDisable() => StopCameraFollow.onStopFollow -= StopFollow;
+        private void OnEnable() => StopCameraAndInputs.onStopCameraFollow += StopFollow;
+        private void OnDisable() => StopCameraAndInputs.onStopCameraFollow -= StopFollow;
     }
 }

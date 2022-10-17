@@ -9,6 +9,7 @@ namespace PedroAurelio.HermitCrab
     {
         public Vector2 CurrentVelocity { get => _rigidbody.velocity; }
         public bool IsGrounded { get => _isGrounded; }
+        public bool HasJumped { get; private set; }
 
         [Header("General Settings")]
         [SerializeField] private Vector2 initialVelocity = new Vector2(3f, 0f);
@@ -18,11 +19,12 @@ namespace PedroAurelio.HermitCrab
         [SerializeField] private Transform groundCheckPoint;
         [SerializeField] private float groundCheckRadius = 0.5f;
         [SerializeField] private LayerMask groundCheckLayer = -1;
-        [SerializeField] private float jumpHeight = 5f;
+        [SerializeField] private float jumpForce = 5f;
 
         [Header("Airborne Settings")]
         [SerializeField] private float _coyoteTimeThreshold = 0.25f;
         [SerializeField] private float _preJumpThreshold = 0.25f;
+        [SerializeField, Range(0f, 3f)] private float gravityMultiplier = 1.5f;
         [SerializeField, Range(0f, 3f)] private float fallMultiplier = 0.5f;
         [SerializeField, Range(0f, 3f)] private float lowJumpMultiplier = 0.5f;
 
@@ -30,7 +32,6 @@ namespace PedroAurelio.HermitCrab
 
         private bool _jumpInput;
         private bool _isGrounded;
-        private float _jumpForce;
         private float _coyoteTimeBuffer;
         private float _preJumpBuffer;
 
@@ -39,8 +40,7 @@ namespace PedroAurelio.HermitCrab
             _rigidbody = GetComponent<Rigidbody2D>();
 
             _rigidbody.velocity = initialVelocity;
-
-            _jumpForce = Mathf.Sqrt(-2f * Physics2D.gravity.y * jumpHeight);
+            _rigidbody.gravityScale *= gravityMultiplier;
         }
 
         private void Update()
@@ -56,6 +56,8 @@ namespace PedroAurelio.HermitCrab
                 Jump();
                 return;
             }
+
+            HasJumped = false;
             
             var overlapCollider = Physics2D.OverlapCircle(groundCheckPoint.position, groundCheckRadius, groundCheckLayer);
             _isGrounded = overlapCollider != null;
@@ -69,8 +71,6 @@ namespace PedroAurelio.HermitCrab
             if (transform.position.y <= maxYPosition)
                 return;
 
-            // ResetVelocityY();
-
             var clampedPosition = new Vector2(transform.position.x, maxYPosition);
             transform.position = clampedPosition;
         }
@@ -79,7 +79,8 @@ namespace PedroAurelio.HermitCrab
         {
             ResetVelocityY();
 
-            _rigidbody.AddForce(Vector2.up * _jumpForce, ForceMode2D.Impulse);
+            _rigidbody.AddForce(Vector2.up * jumpForce, ForceMode2D.Impulse);
+            HasJumped = true;
 
             _coyoteTimeBuffer = 0f;
             _preJumpBuffer = 0f;

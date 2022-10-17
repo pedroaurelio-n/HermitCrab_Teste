@@ -10,19 +10,41 @@ namespace PedroAurelio.HermitCrab
         public delegate void RunnerDeath();
         public static event RunnerDeath onRunnerDeath;
 
+        [SerializeField] private ParticleSystem jumpParticles;
+
         private RunnerMovement _movement;
-        private PlayerAnimation _playerAnimation;
+        private ShootBullet _shoot;
+        private RunnerAnimation _runnerAnimation;
+
+        private bool _hasPlayedParticles;
 
         private void Awake()
         {
             _movement = GetComponent<RunnerMovement>();
-            _playerAnimation = GetComponentInChildren<PlayerAnimation>();
+            _shoot = GetComponent<ShootBullet>();
+            _runnerAnimation = GetComponentInChildren<RunnerAnimation>();
+        }
+
+        private void Update()
+        {
+            if (_movement.IsGrounded)
+            {
+                _hasPlayedParticles = false;
+            }
+
+            if (_movement.HasJumped && !_hasPlayedParticles)
+            {
+                jumpParticles.Play();
+                _hasPlayedParticles = true;
+            }
         }
 
         public void Destroy()
         {
             _movement.ResetVelocity();
-            _playerAnimation.DeathAnimation();
+            _movement.enabled = false;
+            _shoot.enabled = false;
+            _runnerAnimation.DeathAnimation();
             onRunnerDeath?.Invoke();
         }
 

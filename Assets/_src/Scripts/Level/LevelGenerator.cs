@@ -11,7 +11,8 @@ namespace PedroAurelio.HermitCrab
 
         [Header("Dependencies")]
         [SerializeField] private GameObject startArea;
-        [SerializeField] private GameObject finalArea;
+        [SerializeField] private GameObject emptyAreaPrefab;
+        [SerializeField] private GameObject finalAreaPrefab;
         [SerializeField] private List<GameObject> prefabAreas;
 
         [Header("Dimensions Settings")]
@@ -22,7 +23,10 @@ namespace PedroAurelio.HermitCrab
         [SerializeField] private int startGenerationCount = 3;
         [SerializeField] private int maxActiveAreas = 5;
         [SerializeField] private int areaRepositionLimit = 10;
-        [SerializeField] private int gameEndAreaIndex = 30;
+
+        [Header("Generation Settings")]
+        [SerializeField] private int generateEmptyAreaUntil = 3;
+        [SerializeField] private int generateEndAreaAt = 30;
 
         private List<GameObject> _activeAreas = new List<GameObject>();
         private int _areaPositionIndex;
@@ -40,7 +44,7 @@ namespace PedroAurelio.HermitCrab
 
         private void Start()
         {
-            var distanceRemaining = (gameEndAreaIndex * areaWidth);
+            var distanceRemaining = (generateEndAreaAt * areaWidth);
             onDistanceCalculated?.Invoke(distanceRemaining);
         }
 
@@ -63,14 +67,18 @@ namespace PedroAurelio.HermitCrab
 
             GameObject newArea;
 
-            if (_totalAreas < gameEndAreaIndex)
+            if (_totalAreas < generateEmptyAreaUntil)
+            {
+                newArea = Instantiate(emptyAreaPrefab, areaPosition, Quaternion.identity, transform);
+            }
+            else if (_totalAreas >= generateEmptyAreaUntil && _totalAreas < generateEndAreaAt)
             {
                 var r = Random.Range(0, prefabAreas.Count);
                 newArea = Instantiate(prefabAreas[r], areaPosition, Quaternion.identity, transform);
             }
             else
             {
-                newArea = Instantiate(finalArea, areaPosition, Quaternion.identity, transform);
+                newArea = Instantiate(finalAreaPrefab, areaPosition, Quaternion.identity, transform);
             }
 
             _activeAreas.Add(newArea);

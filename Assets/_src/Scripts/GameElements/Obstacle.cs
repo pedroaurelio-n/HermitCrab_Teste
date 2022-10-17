@@ -6,9 +6,22 @@ namespace PedroAurelio.HermitCrab
 {
     public class Obstacle : MonoBehaviour, IDestroyable
     {
+        [SerializeField] private ParticleSystem _deathParticles;
+
+        private Collider2D _collider;
+        private SpriteRenderer _spriteRenderer;
+
+        private void Awake()
+        {
+            _collider = GetComponent<Collider2D>();
+            _spriteRenderer = GetComponentInChildren<SpriteRenderer>();
+        }
+
         public void Destroy()
         {
-            Destroy(gameObject);
+            _collider.enabled = false;
+            _spriteRenderer.enabled = false;
+            _deathParticles.Play();
         }
     }
 }
