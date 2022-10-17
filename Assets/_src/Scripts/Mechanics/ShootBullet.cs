@@ -8,13 +8,17 @@ namespace PedroAurelio.HermitCrab
     {
         public bool HasShot { get; set; }
 
+        [SerializeField] private int initialPoolCount;
+
         [Header("Settings")]
         [SerializeField] private ShotDirection direction;
         [SerializeField] private float speed;
         [SerializeField] private float fireRate;
         [SerializeField] private bool needInput;
-        [SerializeField] private Rigidbody2D bulletPrefab;
+        [SerializeField] private Bullet bulletPrefab;
         [SerializeField] private Transform shootPos;
+
+        private List<Bullet> _bulletPool;
 
         private bool _shootInput;
         private float _shootTime;
@@ -28,7 +32,45 @@ namespace PedroAurelio.HermitCrab
                 case ShotDirection.Left: _direction = Vector2.left; break;
             }
 
-            _shootTime = 0f;
+            InitializePool();
+        }
+
+        private void InitializePool()
+        {
+            _bulletPool = new List<Bullet>();
+
+            for (int i = 0; i < initialPoolCount; i++)
+            {
+                var bullet = CreateNewBullet();
+                _bulletPool.Add(bullet);
+                bullet.gameObject.SetActive(false);
+            }
+        }
+
+        private Bullet CreateNewBullet()
+        {
+            var bullet = Instantiate(bulletPrefab, transform);
+            Debug.Log($"Bullet Created");
+            return bullet;
+        }
+
+        private Bullet GetBulletFromPool()
+        {
+            Bullet bullet;
+
+            for (int i = 0; i < _bulletPool.Count; i++)
+            {
+                bullet = _bulletPool[i];
+                if (!bullet.gameObject.activeInHierarchy)
+                {
+                    bullet.gameObject.SetActive(true);
+                    Debug.Log($"Bullet Pooled");
+                    return bullet;
+                }
+            }
+
+            bullet = CreateNewBullet();
+            return bullet;
         }
 
         private void FixedUpdate()
@@ -51,8 +93,8 @@ namespace PedroAurelio.HermitCrab
 
         public void Shoot()
         {
-            var bullet = Instantiate(bulletPrefab, shootPos.position, Quaternion.identity, transform.parent);
-            bullet.velocity = _direction * speed;
+            var bullet = GetBulletFromPool();
+            bullet.Initialize(transform, transform.parent, shootPos.position, _direction * speed);
 
             HasShot = true;
             _shootTime = fireRate;

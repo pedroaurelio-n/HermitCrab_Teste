@@ -23,5 +23,11 @@ namespace PedroAurelio.HermitCrab
             _spriteRenderer.enabled = false;
             _deathParticles.Play();
         }
+
+        private void OnEnable()
+        {
+            _collider.enabled = true;
+            _spriteRenderer.enabled = true;
+        }
     }
 }

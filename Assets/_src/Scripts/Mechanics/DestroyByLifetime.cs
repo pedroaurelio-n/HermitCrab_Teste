@@ -10,7 +10,17 @@ namespace PedroAurelio.HermitCrab
 
         private void Awake()
         {
-            Destroy(gameObject, lifeTime);
+            StartCoroutine(DestroyCoroutine());
+        }
+
+        private IEnumerator DestroyCoroutine()
+        {
+            yield return new WaitForSeconds(lifeTime);
+            
+            if (TryGetComponent<IPoolable>(out IPoolable poolable))
+                poolable.ReleaseFromPool();
+            else
+                gameObject.SetActive(false);
         }
     }
 }

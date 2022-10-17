@@ -36,5 +36,11 @@ namespace PedroAurelio.HermitCrab
                 _enemyAnimation.AttackAnimation();
             }
         }
+
+        private void OnEnable()
+        {
+            _enemyAnimation.IdleAnimation();
+            _collider.enabled = false;
+        }
     }
 }

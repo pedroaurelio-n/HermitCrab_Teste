@@ -13,7 +13,12 @@ namespace PedroAurelio.HermitCrab
             var otherLayer = other.layer;
 
             if ((1 << otherLayer & contactLayers) != 0) 
-                Destroy(gameObject);
+            {
+                if (TryGetComponent<IPoolable>(out IPoolable poolable))
+                    poolable.ReleaseFromPool();
+                else
+                    gameObject.SetActive(false);
+            }
         }
 
         private void OnCollisionEnter2D(Collision2D other)

@@ -7,8 +7,8 @@ namespace PedroAurelio.HermitCrab
     public class EnemyAnimation : MonoBehaviour
     {
         [Header("Animator Params")]
+        [SerializeField] private string isAlive = "IsAlive";
         [SerializeField] private string attack = "Attack";
-        [SerializeField] private string die = "Die";
 
         private Animator _animator;
 
@@ -17,6 +17,12 @@ namespace PedroAurelio.HermitCrab
         private void Awake()
         {
             _animator = GetComponent<Animator>();
+        }
+        
+        public void IdleAnimation()
+        {
+            _animator.SetBool(isAlive, true);
+            _isDead = false;
         }
 
         public void AttackAnimation()
@@ -29,7 +35,7 @@ namespace PedroAurelio.HermitCrab
             if (_isDead)
                 return;
             
-            _animator.SetTrigger(die);
+            _animator.SetBool(isAlive, false);
             _isDead = true;
         }
     }
