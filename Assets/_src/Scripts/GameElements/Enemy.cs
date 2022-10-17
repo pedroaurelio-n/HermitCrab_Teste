@@ -27,7 +27,7 @@ namespace PedroAurelio.HermitCrab
             _collider.enabled = false;
             _enemyAnimation.DeathAnimation();
             onEnemyDefeated?.Invoke(scoreOnDefeat);
-            deathParticles.Play();
+            deathParticles.gameObject.SetActive(true);
             CinemachineCamera.ShakeCamera(0.2f, 1f, 10);
         }
         

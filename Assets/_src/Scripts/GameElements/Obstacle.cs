@@ -20,7 +20,7 @@ namespace PedroAurelio.HermitCrab
         {
             _collider.enabled = false;
             _spriteRenderer.enabled = false;
-            deathParticles.Play();
+            deathParticles.gameObject.SetActive(true);
             CinemachineCamera.ShakeCamera(0.4f, 4f, 20);
         }
 

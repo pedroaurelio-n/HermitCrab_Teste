@@ -1,4 +1,5 @@
 using UnityEngine;
+using PedroAurelio.AudioSystem;
 
 namespace PedroAurelio.HermitCrab
 {
@@ -15,13 +16,20 @@ namespace PedroAurelio.HermitCrab
         private ShootBullet _shoot;
         private RunnerAnimation _runnerAnimation;
 
+        private PlayAudioEvent _deathAudioEvent;
+
         private bool _hasPlayedParticles;
+        private bool _isAlive;
 
         private void Awake()
         {
+            _isAlive = true;
+
             _movement = GetComponent<RunnerMovement>();
             _shoot = GetComponent<ShootBullet>();
             _runnerAnimation = GetComponentInChildren<RunnerAnimation>();
+
+            _deathAudioEvent = GetComponent<PlayAudioEvent>();
         }
 
         private void Update()
@@ -33,17 +41,25 @@ namespace PedroAurelio.HermitCrab
 
             if (_movement.HasJumped && !_hasPlayedParticles)
             {
-                jumpParticles.Play();
+                jumpParticles.gameObject.SetActive(true);
                 _hasPlayedParticles = true;
             }
         }
 
         public void Death()
         {
+            if (!_isAlive)
+                return;
+            
+            _isAlive = false;
+
             _movement.ResetVelocity();
             _movement.enabled = false;
             _shoot.enabled = false;
+
             _runnerAnimation.DeathAnimation();
+            
+            _deathAudioEvent.PlayAudio();
             onRunnerDeath?.Invoke();
         }
 
