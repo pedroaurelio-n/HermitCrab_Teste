@@ -17,17 +17,18 @@ namespace PedroAurelio.HermitCrab
         private void Awake()
         {
             _animator = GetComponent<Animator>();
+            IdleAnimation();
         }
         
         public void IdleAnimation()
         {
-            _animator.SetBool(isAlive, true);
+            _animator?.SetBool(isAlive, true);
             _isDead = false;
         }
 
         public void AttackAnimation()
         {
-            _animator.SetTrigger(attack);
+            _animator?.SetTrigger(attack);
         }
 
         public void DeathAnimation()
@@ -35,7 +36,7 @@ namespace PedroAurelio.HermitCrab
             if (_isDead)
                 return;
             
-            _animator.SetBool(isAlive, false);
+            _animator?.SetBool(isAlive, false);
             _isDead = true;
         }
     }

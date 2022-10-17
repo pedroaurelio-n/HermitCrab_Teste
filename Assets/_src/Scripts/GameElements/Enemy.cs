@@ -38,9 +38,9 @@ namespace PedroAurelio.HermitCrab
         }
 
         private void OnEnable()
-        {
+        {            
             _enemyAnimation.IdleAnimation();
-            _collider.enabled = false;
+            _collider.enabled = true;
         }
     }
 }

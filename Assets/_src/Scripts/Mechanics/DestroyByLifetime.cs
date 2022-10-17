@@ -8,7 +8,7 @@ namespace PedroAurelio.HermitCrab
     {
         [SerializeField] private float lifeTime;
 
-        private void Awake()
+        private void OnEnable()
         {
             StartCoroutine(DestroyCoroutine());
         }

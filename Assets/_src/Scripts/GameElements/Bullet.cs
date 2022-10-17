@@ -25,8 +25,16 @@ namespace PedroAurelio.HermitCrab
 
         public void ReleaseFromPool()
         {
+            if (!gameObject.activeInHierarchy)
+                return;
+            
             transform.SetParent(_originTransform);
             gameObject.SetActive(false);
+        }
+
+        private void OnDisable()
+        {
+            ReleaseFromPool();
         }
     }
 }
