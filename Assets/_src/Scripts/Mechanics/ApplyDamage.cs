@@ -1,11 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace PedroAurelio.HermitCrab
 {
     public class ApplyDamage : MonoBehaviour
     {
+        [Header("Settings")]
         [SerializeField] private float damage;
         [SerializeField] private LayerMask damageLayers;
 

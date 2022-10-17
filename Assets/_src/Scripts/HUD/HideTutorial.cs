@@ -1,18 +1,28 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 namespace PedroAurelio.HermitCrab
 {
     public class HideTutorial : MonoBehaviour
     {
+        [Header("Dependencies")]
         [SerializeField] private List<GameObject> hudElements;
-        [SerializeField] private float hideAfterTime;
+        [SerializeField] private CanvasGroup panels;
+
+        [Header("Settings")]
+        [SerializeField] private int blinkCount = 3;
+        [SerializeField] private float blinkDuration = 0.75f;
+
+        private WaitForSeconds _waitForBlink;
 
         private void Awake()
         {
+            _waitForBlink = new WaitForSeconds(blinkDuration);
+
             SetHudElements(false);
-            StartCoroutine(Hide());
+            StartCoroutine(Blink());
         }
 
         private void SetHudElements(bool value)
@@ -21,9 +31,15 @@ namespace PedroAurelio.HermitCrab
                 element.SetActive(value);
         }
 
-        private IEnumerator Hide()
+        private IEnumerator Blink()
         {
-            yield return new WaitForSeconds(hideAfterTime);
+            for (int i = 0; i < blinkCount; i++)
+            {
+                panels.DOFade(0f, blinkDuration);
+                yield return _waitForBlink;
+                panels.DOFade(1f, blinkDuration);
+                yield return _waitForBlink;
+            }
 
             SetHudElements(true);
             gameObject.SetActive(false);

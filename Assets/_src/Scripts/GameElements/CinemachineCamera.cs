@@ -1,15 +1,19 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
+using DG.Tweening;
 
 namespace PedroAurelio.HermitCrab
 {
     public class CinemachineCamera : MonoBehaviour
     {
-        private CinemachineVirtualCamera _cinemachineCamera;
+        private static CinemachineVirtualCamera _cinemachineCamera;
 
         private void Awake() => _cinemachineCamera = GetComponent<CinemachineVirtualCamera>();
+
+        public static void ShakeCamera(float duration, float strength, int vibrato)
+        {
+            _cinemachineCamera.transform.DOShakeRotation(duration, strength, vibrato, 90, true, ShakeRandomnessMode.Harmonic);
+        }
 
         private void StopFollow() => _cinemachineCamera.m_Follow = null;
 

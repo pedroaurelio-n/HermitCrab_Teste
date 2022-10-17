@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
@@ -9,6 +7,7 @@ namespace PedroAurelio.HermitCrab
     {
         public int CurrentScore { get => _currentScore; }
         
+        [Header("Dependencies")]
         [SerializeField] private TextMeshProUGUI scoreNumber;
 
         private int _currentScore;

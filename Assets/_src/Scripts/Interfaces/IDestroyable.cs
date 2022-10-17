@@ -1,11 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
 namespace PedroAurelio.HermitCrab
 {
-    public interface IDestroyable
+    public interface IKillable
     {
-        public void Destroy();
+        public void Death();
     }
 }

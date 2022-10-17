@@ -1,11 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace PedroAurelio.HermitCrab
 {
     public class DestroyOnContact : MonoBehaviour
     {
+        [Header("Settings")]
         [SerializeField] private LayerMask contactLayers;
 
         private void CheckForContact(GameObject other)

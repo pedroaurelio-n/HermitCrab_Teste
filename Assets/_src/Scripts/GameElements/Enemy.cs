@@ -1,16 +1,17 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace PedroAurelio.HermitCrab
 {
-    public class Enemy : MonoBehaviour, IDestroyable
+    public class Enemy : MonoBehaviour, IKillable
     {
         public delegate void EnemyDefeated(int score);
         public static event EnemyDefeated onEnemyDefeated;
 
-        [SerializeField] private int scoreOnDefeat;
+        [Header("Dependencies")]
         [SerializeField] private ParticleSystem deathParticles;
+
+        [Header("Settings")]
+        [SerializeField] private int scoreOnDefeat;
 
         private Collider2D _collider;
         private EnemyAnimation _enemyAnimation;
@@ -21,15 +22,16 @@ namespace PedroAurelio.HermitCrab
             _enemyAnimation = GetComponentInChildren<EnemyAnimation>();
         }
 
-        public void Destroy()
+        public void Death()
         {
             _collider.enabled = false;
             _enemyAnimation.DeathAnimation();
             onEnemyDefeated?.Invoke(scoreOnDefeat);
             deathParticles.Play();
+            CinemachineCamera.ShakeCamera(0.2f, 1f, 10);
         }
-
-        private void OnCollisionEnter2D(Collision2D other)
+        
+        private void OnTriggerEnter2D(Collider2D other)
         {
             if (other.gameObject.TryGetComponent<Runner>(out Runner runner))
             {

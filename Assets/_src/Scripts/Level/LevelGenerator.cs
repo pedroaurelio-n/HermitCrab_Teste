@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -52,7 +51,7 @@ namespace PedroAurelio.HermitCrab
             for (int i = 0; i < prefabAreas.Count; i++)
             {
                 var area = CreateNewArea(i);
-                area.SetID(i);
+                area.Id = i;
                 _areaPool.Add(area);
                 area.gameObject.SetActive(false);
             }
@@ -61,14 +60,12 @@ namespace PedroAurelio.HermitCrab
         private LevelArea CreateNewArea(int id)
         {
             var area = Instantiate(prefabAreas[id], transform);
-            Debug.Log($"Area Created");
             return area;
         }
 
         private LevelArea CreateNewArea(LevelArea areaToCreate)
         {
             var area = Instantiate(areaToCreate, transform);
-            Debug.Log($"Area Created");
             return area;
         }
 
@@ -80,13 +77,12 @@ namespace PedroAurelio.HermitCrab
                 area = _areaPool[i];
                 if (area.Id == id)
                 {
-                    Debug.Log($"Area Pooled");
                     return area;
                 }
             }
 
             area = CreateNewArea(id);
-            area.SetID(id);
+            area.Id = id;
             return area;
         }
 
@@ -118,8 +114,7 @@ namespace PedroAurelio.HermitCrab
             if (_totalAreas < generateEmptyAreaUntil)
             {
                 newArea = CreateNewArea(emptyAreaPrefab);
-                newArea.SetID(-1);
-                // newArea = Instantiate(emptyAreaPrefab, areaPosition, Quaternion.identity, transform);
+                newArea.Id = -1;
             }
             else if (_totalAreas >= generateEmptyAreaUntil && _totalAreas < generateEndAreaAt)
             {
@@ -127,12 +122,10 @@ namespace PedroAurelio.HermitCrab
                 newArea = TryToGetAreaFromPool(r);
                 newArea.gameObject.SetActive(true);
                 _areaPool.Remove(newArea);
-                // newArea = Instantiate(prefabAreas[r], areaPosition, Quaternion.identity, transform);
             }
             else
             {
                 newArea = CreateNewArea(finalAreaPrefab);
-                // newArea = Instantiate(finalAreaPrefab, areaPosition, Quaternion.identity, transform);
             }
 
             newArea.Initialize(areaPosition);
@@ -150,7 +143,6 @@ namespace PedroAurelio.HermitCrab
 
                 _activeAreas.RemoveAt(0);
                 oldestArea.ReleaseFromPool();
-                // Destroy(oldestArea.gameObject);
             }
 
             if (_areaPositionIndex >= areaRepositionLimit)

@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -50,7 +49,6 @@ namespace PedroAurelio.HermitCrab
         private Bullet CreateNewBullet()
         {
             var bullet = Instantiate(bulletPrefab, transform);
-            // Debug.Log($"Bullet Created");
             return bullet;
         }
 
@@ -64,7 +62,6 @@ namespace PedroAurelio.HermitCrab
                 if (!bullet.gameObject.activeInHierarchy)
                 {
                     bullet.gameObject.SetActive(true);
-                    // Debug.Log($"Bullet Pooled");
                     return bullet;
                 }
             }

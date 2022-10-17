@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
@@ -7,10 +5,14 @@ namespace PedroAurelio.HermitCrab
 {
     public class GameOverController : MonoBehaviour
     {
+        [Header("General Dependencies")]
         [SerializeField] private ShowScore gameScore;
 
+        [Header("Win Dependencies")]
         [SerializeField] private GameObject winScreen;
         [SerializeField] private TextMeshProUGUI winScore;
+
+        [Header("Loss Dependencies")]
         [SerializeField] private GameObject lossScreen;
         [SerializeField] private TextMeshProUGUI lossScore;
 

@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
@@ -7,6 +5,7 @@ namespace PedroAurelio.HermitCrab
 {
     public class ShowDistance : MonoBehaviour
     {
+        [Header("Dependencies")]
         [SerializeField] private TextMeshProUGUI distanceNumber;
 
         private void Update()
