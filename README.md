@@ -53,7 +53,7 @@ Robot Run é um jogo 2D para dispositivos móveis do gênero Endless Runner com 
 
 ### Documentação
 
-- ![Link da documentação](https://docs.google.com/document/d/1Zyql0vtUk8FP4SFUSYtRFGHQkFriDsS82c5NMB2cVk8)
+- [Link da documentação](https://docs.google.com/document/d/1Zyql0vtUk8FP4SFUSYtRFGHQkFriDsS82c5NMB2cVk8)
 
 - Produzir uma documentação do projeto com:
   - Uma visão geral da arquitetura, design patterns aplicados e próximas atualizações;
