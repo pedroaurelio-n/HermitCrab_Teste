@@ -32,16 +32,25 @@ namespace PedroAurelio.HermitCrab
         private int _areaPositionIndex;
         private int _totalAreas;
 
+        private void OnValidate()
+        {
+            if (maxActiveAreas < 3)
+                maxActiveAreas = 3;
+
+            if (areaRepositionLimit < maxActiveAreas)
+                areaRepositionLimit = maxActiveAreas;
+        }
+
         private void Awake()
         {
+            OnValidate();
+
             _activeAreas.Add(startArea);
 
             InitializePool();
 
             for (int i = _activeAreas.Count; i < startActiveCount; i++)
-            {
                 GenerateNewArea();
-            }
         }
 
         private void InitializePool()
@@ -71,34 +80,21 @@ namespace PedroAurelio.HermitCrab
 
         private LevelArea TryToGetAreaFromPool(int id)
         {
-            LevelArea area;
-            for (int i = 0; i < _areaPool.Count; i++)
+            foreach (LevelArea area in _areaPool)
             {
-                area = _areaPool[i];
                 if (area.Id == id)
-                {
                     return area;
-                }
             }
 
-            area = CreateNewArea(id);
-            area.Id = id;
-            return area;
+            var newArea = CreateNewArea(id);
+            newArea.Id = id;
+            return newArea;
         }
 
         private void Start()
         {
             var distanceRemaining = (generateEndAreaAt * areaWidth);
             onDistanceCalculated?.Invoke(distanceRemaining);
-        }
-
-        private void OnValidate()
-        {
-            if (maxActiveAreas < 3)
-                maxActiveAreas = 3;
-
-            if (areaRepositionLimit < maxActiveAreas)
-                areaRepositionLimit = maxActiveAreas;
         }
 
         private void GenerateNewArea()
@@ -124,9 +120,7 @@ namespace PedroAurelio.HermitCrab
                 _areaPool.Remove(newArea);
             }
             else
-            {
                 newArea = CreateNewArea(finalAreaPrefab);
-            }
 
             newArea.Initialize(areaPosition);
             _activeAreas.Add(newArea);
@@ -158,10 +152,10 @@ namespace PedroAurelio.HermitCrab
             var areasBehindPlayer = maxActiveAreas - 2;
             var resetIndex = -areasBehindPlayer;
 
-            for (int i = 0; i < _activeAreas.Count; i++)
+            foreach (LevelArea area in _activeAreas)
             {
                 var areaPositionX = (resetIndex * areaWidth);
-                _activeAreas[i].transform.position = new Vector2(areaPositionX + cameraOffsetX, 0f);
+                area.transform.position = new Vector2(areaPositionX + cameraOffsetX, 0f);
                 resetIndex++;
             }
         }

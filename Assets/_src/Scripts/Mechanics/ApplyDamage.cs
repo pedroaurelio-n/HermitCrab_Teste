@@ -17,22 +17,16 @@ namespace PedroAurelio.HermitCrab
         private void CheckForDamage(GameObject other)
         {
             var otherLayer = other.gameObject.layer;
+            var otherIsInDamageLayer = (1 << otherLayer & damageLayers) != 0;
 
-            if ((1 << otherLayer & damageLayers) != 0)
+            if (otherIsInDamageLayer)
             {
                 if (other.gameObject.TryGetComponent<Health>(out Health otherHealth))
                     otherHealth.ModifyHealth(-damage);
             }
         }
 
-        private void OnCollisionEnter2D(Collision2D other)
-        {
-            CheckForDamage(other.gameObject);
-        }
-
-        private void OnTriggerEnter2D(Collider2D other)
-        {
-            CheckForDamage(other.gameObject);
-        }
+        private void OnCollisionEnter2D(Collision2D other) => CheckForDamage(other.gameObject);
+        private void OnTriggerEnter2D(Collider2D other) => CheckForDamage(other.gameObject);
     }
 }

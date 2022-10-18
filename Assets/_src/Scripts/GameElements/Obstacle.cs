@@ -7,6 +7,11 @@ namespace PedroAurelio.HermitCrab
         [Header("Dependencies")]
         [SerializeField] private ParticleSystem deathParticles;
 
+        [Header("Shake Settings")]
+        [SerializeField] private float duration = 0.4f;
+        [SerializeField] private Vector3 strength = Vector3.one;
+        [SerializeField] private int vibrato = 20;
+
         private Collider2D _collider;
         private SpriteRenderer _spriteRenderer;
 
@@ -20,8 +25,10 @@ namespace PedroAurelio.HermitCrab
         {
             _collider.enabled = false;
             _spriteRenderer.enabled = false;
+
             deathParticles.gameObject.SetActive(true);
-            CinemachineCamera.ShakeCamera(0.4f, 4f, 20);
+            
+            CinemachineCamera.ShakeCamera(duration, strength, vibrato);
         }
 
         private void OnEnable()

@@ -10,18 +10,21 @@ namespace PedroAurelio.HermitCrab
         [SerializeField] private string shoot = "Shoot";
         [SerializeField] private string die = "Die";
 
+        private bool _isAlive;
+
         private RunnerMovement _movement;
         private ShootBullet _shoot;
         private Animator _animator;
 
-        private bool _isDead;
-
         private void Awake()
         {
             _animator = GetComponent<Animator>();
-            
-            _movement = transform.parent.GetComponent<RunnerMovement>();
-            _shoot = transform.parent.GetComponent<ShootBullet>();
+
+            var parent = transform.parent;            
+            _movement = parent.GetComponent<RunnerMovement>();
+            _shoot = parent.GetComponent<ShootBullet>();
+
+            _isAlive = true;
         }
 
         private void Update()
@@ -44,11 +47,11 @@ namespace PedroAurelio.HermitCrab
 
         public void DeathAnimation()
         {
-            if (_isDead)
+            if (!_isAlive)
                 return;
             
             _animator.SetTrigger(die);
-            _isDead = true;
+            _isAlive = false;
         }
     }
 }

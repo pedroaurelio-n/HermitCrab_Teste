@@ -8,10 +8,7 @@ namespace PedroAurelio.HermitCrab
         private Transform _originTransform;
         private Rigidbody2D _rigidbody;
 
-        private void Awake()
-        {
-            _rigidbody = GetComponent<Rigidbody2D>();
-        }
+        private void Awake() => _rigidbody = GetComponent<Rigidbody2D>();
 
         public void Initialize(Transform origin, Transform levelSpace, Vector3 position, Vector2 speed)
         {
@@ -30,9 +27,6 @@ namespace PedroAurelio.HermitCrab
             gameObject.SetActive(false);
         }
 
-        private void OnDisable()
-        {
-            ReleaseFromPool();
-        }
+        private void OnDisable() => ReleaseFromPool();
     }
 }

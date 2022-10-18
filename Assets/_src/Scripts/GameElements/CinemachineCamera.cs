@@ -10,9 +10,9 @@ namespace PedroAurelio.HermitCrab
 
         private void Awake() => _cinemachineCamera = GetComponent<CinemachineVirtualCamera>();
 
-        public static void ShakeCamera(float duration, float strength, int vibrato)
+        public static void ShakeCamera(float duration, Vector3 strength, int vibrato)
         {
-            _cinemachineCamera.transform.DOShakeRotation(duration, strength, vibrato, 90, true, ShakeRandomnessMode.Harmonic);
+            _cinemachineCamera.transform.DOShakeRotation(duration, strength, vibrato, 2f);
         }
 
         private void StopFollow() => _cinemachineCamera.m_Follow = null;

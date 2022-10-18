@@ -10,8 +10,9 @@ namespace PedroAurelio.HermitCrab
         private void CheckForContact(GameObject other)
         {
             var otherLayer = other.layer;
+            var otherIsInContactLayer = (1 << otherLayer & contactLayers) != 0;
 
-            if ((1 << otherLayer & contactLayers) != 0) 
+            if (otherIsInContactLayer) 
             {
                 if (TryGetComponent<IPoolable>(out IPoolable poolable))
                     poolable.ReleaseFromPool();
@@ -20,14 +21,7 @@ namespace PedroAurelio.HermitCrab
             }
         }
 
-        private void OnCollisionEnter2D(Collision2D other)
-        {
-            CheckForContact(other.gameObject);
-        }
-
-        private void OnTriggerEnter2D(Collider2D other)
-        {
-            CheckForContact(other.gameObject);
-        }
+        private void OnCollisionEnter2D(Collision2D other) => CheckForContact(other.gameObject);
+        private void OnTriggerEnter2D(Collider2D other) => CheckForContact(other.gameObject);
     }
 }

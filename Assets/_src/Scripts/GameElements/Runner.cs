@@ -12,14 +12,14 @@ namespace PedroAurelio.HermitCrab
         [Header("Dependencies")]
         [SerializeField] private ParticleSystem jumpParticles;
 
+        private bool _hasPlayedParticles;
+        private bool _isAlive;
+
         private RunnerMovement _movement;
         private ShootBullet _shoot;
         private RunnerAnimation _runnerAnimation;
 
         private PlayAudioEvent _deathAudioEvent;
-
-        private bool _hasPlayedParticles;
-        private bool _isAlive;
 
         private void Awake()
         {
@@ -35,9 +35,7 @@ namespace PedroAurelio.HermitCrab
         private void Update()
         {
             if (_movement.IsGrounded)
-            {
                 _hasPlayedParticles = false;
-            }
 
             if (_movement.HasJumped && !_hasPlayedParticles)
             {
@@ -54,13 +52,14 @@ namespace PedroAurelio.HermitCrab
             _isAlive = false;
 
             _movement.ResetVelocity();
+            _movement.SetJumpInput(false);
             _movement.enabled = false;
             _shoot.enabled = false;
 
             _runnerAnimation.DeathAnimation();
+            onRunnerDeath?.Invoke();
             
             _deathAudioEvent.PlayAudio();
-            onRunnerDeath?.Invoke();
         }
 
         private void OnCollisionEnter2D(Collision2D other)

@@ -12,6 +12,11 @@ namespace PedroAurelio.HermitCrab
 
         [Header("Settings")]
         [SerializeField] private int scoreOnDefeat;
+        
+        [Header("Shake Settings")]
+        [SerializeField] private float duration = 0.2f;
+        [SerializeField] private Vector3 strength = Vector3.one;
+        [SerializeField] private int vibrato = 10;
 
         private Collider2D _collider;
         private EnemyAnimation _enemyAnimation;
@@ -26,9 +31,11 @@ namespace PedroAurelio.HermitCrab
         {
             _collider.enabled = false;
             _enemyAnimation.DeathAnimation();
+            
             onEnemyDefeated?.Invoke(scoreOnDefeat);
             deathParticles.gameObject.SetActive(true);
-            CinemachineCamera.ShakeCamera(0.2f, 1f, 10);
+            
+            CinemachineCamera.ShakeCamera(duration, strength, vibrato);
         }
         
         private void OnTriggerEnter2D(Collider2D other)

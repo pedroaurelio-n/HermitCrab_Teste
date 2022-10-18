@@ -7,15 +7,16 @@ namespace PedroAurelio.HermitCrab
     {
         public bool HasShot { get; set; }
 
-        [SerializeField] private int initialPoolCount;
+        [Header("Dependencies")]
+        [SerializeField] private Bullet bulletPrefab;
+        [SerializeField] private Transform shootPos;
 
         [Header("Settings")]
         [SerializeField] private ShotDirection direction;
         [SerializeField] private float speed;
         [SerializeField] private float fireRate;
+        [SerializeField] private int initialPoolCount;
         [SerializeField] private bool needInput;
-        [SerializeField] private Bullet bulletPrefab;
-        [SerializeField] private Transform shootPos;
 
         private List<Bullet> _bulletPool;
 
@@ -54,11 +55,8 @@ namespace PedroAurelio.HermitCrab
 
         private Bullet GetBulletFromPool()
         {
-            Bullet bullet;
-
-            for (int i = 0; i < _bulletPool.Count; i++)
+            foreach (Bullet bullet in _bulletPool)
             {
-                bullet = _bulletPool[i];
                 if (!bullet.gameObject.activeInHierarchy)
                 {
                     bullet.gameObject.SetActive(true);
@@ -66,8 +64,8 @@ namespace PedroAurelio.HermitCrab
                 }
             }
 
-            bullet = CreateNewBullet();
-            return bullet;
+            var newBullet = CreateNewBullet();
+            return newBullet;
         }
 
         private void FixedUpdate()

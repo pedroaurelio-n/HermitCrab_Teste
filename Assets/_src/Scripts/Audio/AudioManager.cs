@@ -11,8 +11,6 @@ namespace PedroAurelio.AudioSystem
 
         private List<AudioPlayer> _audioPlayerPool;
 
-        private Coroutine _disableCoroutine;
-
         private void Awake()
         {
             _audioPlayerPool = new List<AudioPlayer>();
@@ -30,10 +28,10 @@ namespace PedroAurelio.AudioSystem
 
         private AudioPlayer OnGetAudioPlayer()
         {
-            for (int i = 0; i < _audioPlayerPool.Count; i++)
+            foreach (AudioPlayer audioPlayer in _audioPlayerPool)
             {
-                if (!_audioPlayerPool[i].gameObject.activeInHierarchy)
-                    return _audioPlayerPool[i];
+                if (!audioPlayer.gameObject.activeInHierarchy)
+                    return audioPlayer;
             }
 
             return OnCreateAudioPlayer();
@@ -65,14 +63,7 @@ namespace PedroAurelio.AudioSystem
             audioPlayer.PlayAudio(clipSO, position, delay, () => OnReleaseAudioPlayer(audioPlayer));
         }
 
-        private void OnEnable()
-        {
-            audioChannel.onRaiseAudio += PlayAudio;
-        }
-
-        private void OnDisable()
-        {
-            audioChannel.onRaiseAudio -= PlayAudio;
-        }
+        private void OnEnable() => audioChannel.onRaiseAudio += PlayAudio;
+        private void OnDisable() => audioChannel.onRaiseAudio -= PlayAudio;
     }
 }

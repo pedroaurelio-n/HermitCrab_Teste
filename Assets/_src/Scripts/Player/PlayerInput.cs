@@ -6,10 +6,10 @@ namespace PedroAurelio.HermitCrab
     [RequireComponent(typeof(ShootBullet))]
     public class PlayerInput : MonoBehaviour
     {
+        private float _screenHalfWidth;
+        
         private RunnerMovement _movement;
         private ShootBullet _shoot;
-
-        private float _screenHalfWidth;
 
         private void Awake()
         {
@@ -21,26 +21,7 @@ namespace PedroAurelio.HermitCrab
 
         private void Update()
         {
-            if (Input.touchCount > 0)
-            {
-                foreach (Touch touch in Input.touches)
-                {
-                    if (touch.position.x <= _screenHalfWidth)
-                    {
-                        if (touch.phase == TouchPhase.Began)
-                            _movement.SetJumpInput(true);
-                        else if (touch.phase == TouchPhase.Ended)
-                            _movement.SetJumpInput(false);
-                    }
-                    else
-                    {
-                        if (touch.phase == TouchPhase.Began)
-                            _shoot.SetShootInput(true);
-                        else if (touch.phase == TouchPhase.Ended)
-                            _shoot.SetShootInput(false);
-                    }
-                }
-            }
+            HandleTouchInputs();
 
             #if UNITY_EDITOR
             if (Input.GetMouseButtonDown(0))
@@ -63,6 +44,34 @@ namespace PedroAurelio.HermitCrab
                 _movement.SetJumpInput(false);
             }
             #endif
+        }
+
+        private void HandleTouchInputs()
+        {
+            if (Input.touchCount == 0)
+                return;
+            
+            foreach (Touch touch in Input.touches)
+            {
+                if (touch.position.x <= _screenHalfWidth)
+                {
+                    switch (touch.phase)
+                    {
+                        case TouchPhase.Began: _movement.SetJumpInput(true); break;
+                        case TouchPhase.Ended: _movement.SetJumpInput(false); break;
+                        default: break;
+                    }
+                }
+                else
+                {
+                    switch (touch.phase)
+                    {
+                        case TouchPhase.Began: _shoot.SetShootInput(true); break;
+                        case TouchPhase.Ended: _shoot.SetShootInput(false); break;
+                        default: break;
+                    }
+                }
+            }
         }
     }
 }

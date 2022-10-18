@@ -165,8 +165,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6100e78f07a7062438ba66b54ca2358d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scoreOnDefeat: 1
   deathParticles: {fileID: 3817981173767989728}
+  scoreOnDefeat: 1
+  duration: 0.3
+  strength: {x: 6, y: 6, z: 0}
+  vibrato: 25
 --- !u!114 &5227925717706975626
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -5,7 +5,7 @@ using DG.Tweening;
 
 namespace PedroAurelio.HermitCrab
 {
-    public class HideTutorial : MonoBehaviour
+    public class TutorialController : MonoBehaviour
     {
         [Header("Dependencies")]
         [SerializeField] private List<GameObject> hudElements;

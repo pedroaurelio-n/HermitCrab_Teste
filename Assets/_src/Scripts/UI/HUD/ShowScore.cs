@@ -5,17 +5,14 @@ namespace PedroAurelio.HermitCrab
 {
     public class ShowScore : MonoBehaviour
     {
-        public int CurrentScore { get => _currentScore; }
+        public int CurrentScore => _currentScore;
         
         [Header("Dependencies")]
         [SerializeField] private TextMeshProUGUI scoreNumber;
 
         private int _currentScore;
 
-        private void Awake()
-        {
-            AddScore(0);
-        }
+        private void Awake() => AddScore(0);
 
         private void AddScore(int score)
         {

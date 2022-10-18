@@ -24,9 +24,6 @@ namespace PedroAurelio.AudioSystem
                 if (playOnStart)
                     audioChannel.RaiseEvent(clipSO, transform.position, delay);
             }
-
-            if (willPoolOnStart)
-                _isReady = true;
         }
 
         private void OnDisable()

@@ -5,8 +5,8 @@ namespace PedroAurelio.HermitCrab
     [RequireComponent(typeof(Rigidbody2D))]
     public class RunnerMovement : MonoBehaviour
     {
-        public Vector2 CurrentVelocity { get => _rigidbody.velocity; }
-        public bool IsGrounded { get => _isGrounded; }
+        public Vector2 CurrentVelocity => _rigidbody.velocity;
+        public bool IsGrounded => _isGrounded;
         public bool HasJumped { get; private set; }
 
         [Header("General Settings")]
@@ -26,12 +26,12 @@ namespace PedroAurelio.HermitCrab
         [SerializeField, Range(0f, 3f)] private float fallMultiplier = 0.5f;
         [SerializeField, Range(0f, 3f)] private float lowJumpMultiplier = 0.5f;
 
-        private Rigidbody2D _rigidbody;
-
         private bool _jumpInput;
         private bool _isGrounded;
         private float _coyoteTimeBuffer;
         private float _preJumpBuffer;
+
+        private Rigidbody2D _rigidbody;
 
         private void Awake()
         {

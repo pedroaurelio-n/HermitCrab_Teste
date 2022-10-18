@@ -48,6 +48,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   deathParticles: {fileID: 1261642909518776425}
+  duration: 0.4
+  strength: {x: 10, y: 10, z: 0}
+  vibrato: 50
 --- !u!114 &3135713441530948606
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -7,9 +7,9 @@ namespace PedroAurelio.HermitCrab
         [Header("Settings")]
         [SerializeField] private float maxHealth;
 
-        private IKillable _destroyable;
-
         private float _currentHealth;
+
+        private IKillable _destroyable;
 
         private void Awake()
         {

@@ -8,10 +8,7 @@ namespace PedroAurelio.HermitCrab
         [Header("Settings")]
         [SerializeField] private float lifeTime;
 
-        private void OnEnable()
-        {
-            StartCoroutine(DestroyCoroutine());
-        }
+        private void OnEnable() => StartCoroutine(DestroyCoroutine());
 
         private IEnumerator DestroyCoroutine()
         {

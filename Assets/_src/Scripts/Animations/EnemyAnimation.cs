@@ -8,9 +8,9 @@ namespace PedroAurelio.HermitCrab
         [SerializeField] private string isAlive = "IsAlive";
         [SerializeField] private string attack = "Attack";
 
-        private Animator _animator;
+        private bool _isAlive;
 
-        private bool _isDead;
+        private Animator _animator;
 
         private void Awake()
         {
@@ -20,22 +20,28 @@ namespace PedroAurelio.HermitCrab
         
         public void IdleAnimation()
         {
-            _animator?.SetBool(isAlive, true);
-            _isDead = false;
+            if (_animator == null)
+                return;
+            
+            _animator.SetBool(isAlive, true);
+            _isAlive = true;
         }
 
         public void AttackAnimation()
         {
-            _animator?.SetTrigger(attack);
+            if (_animator == null)
+                return;
+            
+            _animator.SetTrigger(attack);
         }
 
         public void DeathAnimation()
         {
-            if (_isDead)
+            if (!_isAlive || _animator == null)
                 return;
             
-            _animator?.SetBool(isAlive, false);
-            _isDead = true;
+            _animator.SetBool(isAlive, false);
+            _isAlive = false;
         }
     }
 }
